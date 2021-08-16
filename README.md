@@ -1,4 +1,5 @@
 # Sentiment Analysis of Yelp Reviews
+By Jordan Ziskin
 
 ## Abstract:
 
