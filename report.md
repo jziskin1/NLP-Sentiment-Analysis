@@ -7,25 +7,25 @@ Re: Case Study in Social Media: Sentiment Analysis with Yelp Reviews
 
 ### Abstract:
 
-AI has come a long way in the last few decades. One of the more recent developments has been in AI's understanding of how humans express emotion through language. It may be easy to teach a computer that the word “angry” indicates a negative emotion and “happy” indicates a positive emotion, but consider the sentence “David, while I understand you think you disappointed us all and ruined your chances at reaching nationals, I’m proud of you.” A sentence like this contains words that indicate negative emotions, like “disappointed” and “ruined”, as well as the word “proud”, indicating a positive emotion. We as humans can parse this sentence to figure out that the speaker feels positive emotions towards David, but for a computer, it might not be so obvious.\
+AI has come a long way in the last few decades. One of the more recent developments has been in AI's understanding of how humans express emotion through language. It may be easy to teach a computer that the word “angry” indicates a negative emotion and “happy” indicates a positive emotion, but consider the sentence “David, while I understand you think you disappointed us all and ruined your chances at reaching nationals, I’m proud of you.” A sentence like this contains words that indicate negative emotions, like “disappointed” and “ruined”, as well as the word “proud”, indicating a positive emotion. We as humans can parse this sentence to figure out that the speaker feels positive emotions towards David, but for a computer, it might not be so obvious.
 
-One technique for teaching AI to identify positive and negative emotions expressed through language is sentiment analysis. Using neural networks, we can feed our AI hundreds of thousands of messages labeled as positive or negative and over time, the AI will be able to determine whether sentences it has never seen before are positive, negative, or neutral.\
+One technique for teaching AI to identify positive and negative emotions expressed through language is sentiment analysis. Using neural networks, we can feed our AI hundreds of thousands of messages labeled as positive or negative and over time, the AI will be able to determine whether sentences it has never seen before are positive, negative, or neutral.
 
-Yelp reviews provide a great opportunity to perform sentiment analysis. Yelp is a review website in which users can rate local businesses on a scale from 1 to 5 stars with 5 stars being the best possible rating. Yelp averages more than 178 million unique visitors every month across its mobile, desktop, and app versions. Below is an example of two yelp reviews. They contain the users information, star rating, review date, and review text.\
+Yelp reviews provide a great opportunity to perform sentiment analysis. Yelp is a review website in which users can rate local businesses on a scale from 1 to 5 stars with 5 stars being the best possible rating. Yelp averages more than 178 million unique visitors every month across its mobile, desktop, and app versions. Below is an example of two yelp reviews. They contain the users information, star rating, review date, and review text.
 
 ![](reviews.png)  
 
-Our goal is to create an AI that will view thousands upon thousands of yelp reviews classified as either positive or negative based on their star rating and use what it learned to be able to predict whether a review it has never seen before it a positive or a negative review.\
+Our goal is to create an AI that will view thousands upon thousands of yelp reviews classified as either positive or negative based on their star rating and use what it learned to be able to predict whether a review it has never seen before it a positive or a negative review.
 
-Yelp has been kind enough to provide a dataset containing over 8 million reviews available for download to the public at https://www.yelp.com/dataset. We will download this data and use the yelp_academic_dataset_review.json to extract our reviews and star ratings using the json package in python.\
+Yelp has been kind enough to provide a dataset containing over 8 million reviews available for download to the public at https://www.yelp.com/dataset. We will download this data and use the yelp_academic_dataset_review.json to extract our reviews and star ratings using the json package in python.
 
-This project has quite a few challenges. First, we have to think about how we define a positive or a negative review. While it is quite obvious that a 1 star and 2 star rating is negative and a 4 star and 5 star rating is positive, what do we do about 3 stars? We could consider 3 stars to be neutral, but in practice this is usually not the case. Having worked at Yelp for a summer and having talked to many users and business owners, I found 3 star reviews are rarely neutral, but rather contain both positive and negative aspects. In my experience, 3 stars is on the border of being great, but isn’t quite there and for that reason we will classify 3 stars as negative instead of positive or neutral.\
+This project has quite a few challenges. First, we have to think about how we define a positive or a negative review. While it is quite obvious that a 1 star and 2 star rating is negative and a 4 star and 5 star rating is positive, what do we do about 3 stars? We could consider 3 stars to be neutral, but in practice this is usually not the case. Having worked at Yelp for a summer and having talked to many users and business owners, I found 3 star reviews are rarely neutral, but rather contain both positive and negative aspects. In my experience, 3 stars is on the border of being great, but isn’t quite there and for that reason we will classify 3 stars as negative instead of positive or neutral.
 
-Our next challenge is one of file size and computer processing. The file that houses the yelp reviews is incredibly large at 10GB. Additionally, a word2vec file by google we will use for word embedding in some runs of the program is another 1.5GB uncompressed. This takes up a lot of space and memory and running this on my desktop was very slow. Of the 8 million reviews available from the yelp dataset, I was only able to run the program using just under 500,000 before the program crashed.\
+Our next challenge is one of file size and computer processing. The file that houses the yelp reviews is incredibly large at 10GB. Additionally, a word2vec file by google we will use for word embedding in some runs of the program is another 1.5GB uncompressed. This takes up a lot of space and memory and running this on my desktop was very slow. Of the 8 million reviews available from the yelp dataset, I was only able to run the program using just under 500,000 before the program crashed.
 
-To improve upon this implementation, I would consider using a cloud platform such as AWS to temporarily house the necessary large files and to run model training and fitting. Instead, I ran the entire project in a virtual pip environment from my 2019 MacBook Pro running MacOS Big Sur version 11.1 with a 2.3 GHz 8-Core Intel Core i9 processor and 32GB of memory.\
+To improve upon this implementation, I would consider using a cloud platform such as AWS to temporarily house the necessary large files and to run model training and fitting. Instead, I ran the entire project in a virtual pip environment from my 2019 MacBook Pro running MacOS Big Sur version 11.1 with a 2.3 GHz 8-Core Intel Core i9 processor and 32GB of memory.
 
-To train our model, I began with a long short-term memory (LSTM) neural network in Keras and built upon it in a variety of ways. Some trials involved word embedding using an outside word2vec resource while other trials involved a built in embedding layer into the Keras model. I also experimented with adding a 1D convolutional layer after the embedding layer. Dropout and recurrent dropout were used to prevent overfitting. In the end, I was able to create a handful of models that could predict the sentiment of yelp reviews with nearly 90% accuracy. Find a demonstration of the module at https://www.youtube.com/watch?v=ub_Gwzl3iXc\
+To train our model, I began with a long short-term memory (LSTM) neural network in Keras and built upon it in a variety of ways. Some trials involved word embedding using an outside word2vec resource while other trials involved a built in embedding layer into the Keras model. I also experimented with adding a 1D convolutional layer after the embedding layer. Dropout and recurrent dropout were used to prevent overfitting. In the end, I was able to create a handful of models that could predict the sentiment of yelp reviews with nearly 90% accuracy. Find a demonstration of the module at https://www.youtube.com/watch?v=ub_Gwzl3iXc
 
 ## Data Preprocessing
 ### Data Extraction
@@ -385,9 +385,9 @@ At this point our preprocessing function will return a numpy array of tokenized 
 
 ## Modeling
 
-For this project, I built a few different models that all fed into a LSTM recurrent neural network. A LSTM recurrent neural network is excellent for sentiment analysis because it has feedback connections that allow it to analyze sequences of data. While a typically neural network may be able to understand the word "bad" indicates a negative emotion, it may struggle with the sentence "The food was not bad." Since both the words "not" and "bad" are negative, a regular neural network may classify a sentence containing both of these words as negative. A LSTM recurrent neural network is far less likely to suffer from this issue because it will be able to learn that a sequence of double negatives is positive.\
+For this project, I built a few different models that all fed into a LSTM recurrent neural network. A LSTM recurrent neural network is excellent for sentiment analysis because it has feedback connections that allow it to analyze sequences of data. While a typically neural network may be able to understand the word "bad" indicates a negative emotion, it may struggle with the sentence "The food was not bad." Since both the words "not" and "bad" are negative, a regular neural network may classify a sentence containing both of these words as negative. A LSTM recurrent neural network is far less likely to suffer from this issue because it will be able to learn that a sequence of double negatives is positive.
  
-In this project, I created 3 different types of LSTM models. First, I used a model that tokenized the review text through Keras and embedded the words in an embedding layer that fed into the LSTM RNN. The second model used the same strategy except I added in a 1D convolutional and max pooling layer after the embedding layer to better help my model understand sequences of words. The final model got its word embeddings from Google's words2vec and then fed that straight into the LSTM RNN.\
+In this project, I created 3 different types of LSTM models. First, I used a model that tokenized the review text through Keras and embedded the words in an embedding layer that fed into the LSTM RNN. The second model used the same strategy except I added in a 1D convolutional and max pooling layer after the embedding layer to better help my model understand sequences of words. The final model got its word embeddings from Google's words2vec and then fed that straight into the LSTM RNN.
 
 ![](models.png)
 
@@ -521,15 +521,15 @@ _________________________________________________________________
 To my surprise, all 3 models performed nearly identically when we used a sample size of 200,000 reviews. See below:
 
 
-#### Model 1: Keras Tokenization & Embedding to LSTM\
+#### Model 1: Keras Tokenization & Embedding to LSTM
 
 ![](accuracy1.png)
 
-#### Model 2: Keras Tokenization & Embedding w/ 1D Convolutional Layer to LSTM\
+#### Model 2: Keras Tokenization & Embedding w/ 1D Convolutional Layer to LSTM
 
 ![](accuracy2.png)
 
-#### Model 3: Google's word2vec Embedding to LSTM\
+#### Model 3: Google's word2vec Embedding to LSTM
 
 ![](accuracy3.png)
 
@@ -541,7 +541,7 @@ To my surprise, all 3 models performed nearly identically when we used a sample 
 | 2 | 88.56% | 1 |
 | 3 | 88.08% | 6 |
 
-More surprising than every model getting to nearly 90% accuracy was how quickly they got there. During repeated trials, I found that most hit their maximum validation accuracy by epoch 3 or 4. By epoch 2, very few increased more than a percentage or two. When it comes to performance, model 2 ran the fastest due the to convolutional and max pooling layers. Despite having the fewest model weights, model 3 ran the slowest because word embedding with the large google file took a very long time and the dimensions of the inputs became very large and difficult for the model to handle efficiently.\
+More surprising than every model getting to nearly 90% accuracy was how quickly they got there. During repeated trials, I found that most hit their maximum validation accuracy by epoch 3 or 4. By epoch 2, very few increased more than a percentage or two. When it comes to performance, model 2 ran the fastest due the to convolutional and max pooling layers. Despite having the fewest model weights, model 3 ran the slowest because word embedding with the large google file took a very long time and the dimensions of the inputs became very large and difficult for the model to handle efficiently.
 
 The plots above were created in visualization.py. See the code below.
 
@@ -931,7 +931,6 @@ The YelpReviews module is built to give users a chance to mess around with diffe
 
 ## Conclusions
 
-This project was entertaining to build. It is fascinating that an artificial neural network can interpret something as human as emotions. I was quite impressed that these models were able to approach 90% accuracy, but with that said there is much room for improvement. I did not used any stemming or lemmatization strategies here and doing so could have potentially pushed the validation accuracy even higher. Additionally, I could have considered other recurrent neural networks instead of just an LSTM. Lastly, cloud computing is a necessity for large datasets.\
+This project was entertaining to build. It is fascinating that an artificial neural network can interpret something as human as emotions. I was quite impressed that these models were able to approach 90% accuracy, but with that said there is much room for improvement. I did not used any stemming or lemmatization strategies here and doing so could have potentially pushed the validation accuracy even higher. Additionally, I could have considered other recurrent neural networks instead of just an LSTM. Lastly, cloud computing is a necessity for large datasets.
 
 I hope you enjoy tinkering around with this module. Have fun creating models and seeing if the AI can predict the sentiment of reviews you write from scratch!
-
