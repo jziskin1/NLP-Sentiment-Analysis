@@ -27,8 +27,6 @@ To improve upon this implementation, I would consider using a cloud platform suc
 
 To train our model, I began with a long short-term memory (LSTM) neural network in Keras and built upon it in a variety of ways. Some trials involved word embedding using an outside word2vec resource while other trials involved a built in embedding layer into the Keras model. I also experimented with adding a 1D convolutional layer after the embedding layer. Dropout and recurrent dropout were used to prevent overfitting. In the end, I was able to create a handful of models that could predict the sentiment of yelp reviews with nearly 90% accuracy. Find a demonstration of the module at https://www.youtube.com/watch?v=ub_Gwzl3iXc\
 
-\pagebreak
-
 ## Data Preprocessing
 ### Data Extraction
 To process the data, I used the built-in json module in python to transform the json data to a python dictionary. I extracted the review text and numbers of stars from the json file and assigned them to python lists. Additionally, I changed 1, 2, and 3 stars to a 0 indicating a negative review and changed 4 and 5 star reviews to a 1 indicating a positive review. These transformed star ratings were assigned to a python list called sentiments. I also made sure to extract the same number of positive and negative reviews to keep my dataset balanced.
@@ -385,8 +383,6 @@ def pad_vectors(vectors, sentiments=None, max_word_len=0):
 
 At this point our preprocessing function will return a numpy array of tokenized reviews (or vectorized reviews) and sentiments that are ready to be fed into our neural network.
 
-\pagebreak
-
 ## Modeling
 
 For this project, I built a few different models that all fed into a LSTM recurrent neural network. A LSTM recurrent neural network is excellent for sentiment analysis because it has feedback connections that allow it to analyze sequences of data. While a typically neural network may be able to understand the word "bad" indicates a negative emotion, it may struggle with the sentence "The food was not bad." Since both the words "not" and "bad" are negative, a regular neural network may classify a sentence containing both of these words as negative. A LSTM recurrent neural network is far less likely to suffer from this issue because it will be able to learn that a sequence of double negatives is positive.\
@@ -394,8 +390,6 @@ For this project, I built a few different models that all fed into a LSTM recurr
 In this project, I created 3 different types of LSTM models. First, I used a model that tokenized the review text through Keras and embedded the words in an embedding layer that fed into the LSTM RNN. The second model used the same strategy except I added in a 1D convolutional and max pooling layer after the embedding layer to better help my model understand sequences of words. The final model got its word embeddings from Google's words2vec and then fed that straight into the LSTM RNN.\
 
 ![](models.png)
-
-\pagebreak
 
 Here, we have the code in models.py that builds these models. Notice the embedded and conv flags that shape the type of model we end up with. When the embedded flag is False, we have an embedded layer of dimensions (25000, 150) and an input length of 350. In addition, if the conv flag is True, a convolutional layer is used with 75 filters, a kernel size of 5, and ReLu activation. Then a max pooling layer is used with a pool size of 4. For all the models we use an LSTM with 150 units and 0.2 dropout and recurrent dropout. All models also have a dense output layer that uses the sigmoid activation function for binary classification. Lastly, all models are compiled using the adam optimizer and we track the accuracy of each model.
 
@@ -504,7 +498,7 @@ Trainable params: 3,942,076
 Non-trainable params: 0
 _________________________________________________________________
 ```
-\pagebreak
+
 #### Model 3: Google's word2vec Embedding to LSTM
 
 ```
@@ -522,8 +516,6 @@ Non-trainable params: 0
 _________________________________________________________________
 ```
 
-\pagebreak
-
 ## Results
 
 To my surprise, all 3 models performed nearly identically when we used a sample size of 200,000 reviews. See below:
@@ -540,8 +532,6 @@ To my surprise, all 3 models performed nearly identically when we used a sample 
 #### Model 3: Google's word2vec Embedding to LSTM\
 
 ![](accuracy3.png)
-
-\pagebreak
 
 #### Accuracy Table
 
@@ -892,8 +882,6 @@ def main(args):
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
 ```
-
-\pagebreak
 
 ## Running the Yelp Reviews Module
 
