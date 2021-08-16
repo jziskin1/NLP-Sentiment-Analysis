@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # CSCI S-89 Summer 2021
 
 To: Professor Kurochkin and TAs  
