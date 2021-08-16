@@ -1,10 +1,3 @@
-# CSCI S-89 Summer 2021
-
-To: Professor Kurochkin and TAs  
-From: Jordan Ziskin  
-Due: August 6, 2021  
-Re: Case Study in Social Media: Sentiment Analysis with Yelp Reviews
-
 ### Abstract:
 
 AI has come a long way in the last few decades. One of the more recent developments has been in AI's understanding of how humans express emotion through language. It may be easy to teach a computer that the word “angry” indicates a negative emotion and “happy” indicates a positive emotion, but consider the sentence “David, while I understand you think you disappointed us all and ruined your chances at reaching nationals, I’m proud of you.” A sentence like this contains words that indicate negative emotions, like “disappointed” and “ruined”, as well as the word “proud”, indicating a positive emotion. We as humans can parse this sentence to figure out that the speaker feels positive emotions towards David, but for a computer, it might not be so obvious.
